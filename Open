@@ -1,0 +1,22 @@
+--Someday, Mak will find you. Break those, chains that bind you.
+local Player = game.Workspace:FindFirstChild(script.Parent.Parent.Parent.Parent.Name)
+distance = 0
+
+function Click()
+	local Player = game.Workspace:FindFirstChild(script.Parent.Parent.Parent.Parent.Name)
+	if Player then
+		script.Parent.Zab.Value = script.Parent.Zab.Value + 1 -(2*script.Parent.Zab.Value)
+		print(script.Parent.Zab.Value)
+		if script.Parent.Zab.Value==1 then
+			script.Parent.Parent.Quote.Visible = true
+			while script.Parent.Zab.Value==1 do
+				distance = (math.floor(math.abs((Player.Torso.Position.x-32)/64)+.5))+(math.floor(math.abs((Player.Torso.Position.z-32)/64)+.5))
+				script.Parent.Parent.Quote.Text = "Buy for"..(400*((20/distance)^2))
+				wait(.1)
+			end
+		else
+			script.Parent.Parent.Quote.Visible = false
+		end
+	end
+end
+script.Parent.MouseButton1Down:connect(Click)
