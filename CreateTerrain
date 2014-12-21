@@ -1,0 +1,14 @@
+print("Creating terrain")
+
+for z = -20,20 do
+	for x= -20,20 do
+		if x~=0 or z~=0 then
+			local clone = game.Workspace.Base:Clone()
+			clone.Parent = game.Workspace.Ground
+			clone.Position = Vector3.new((64*x)+32,0,(64*z)+32)
+			clone.Name = ((1000*z)+x+20020)
+		end
+	end
+end
+
+game.Workspace.Base.Parent = game.Lighting
