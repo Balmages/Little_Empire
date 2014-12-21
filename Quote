@@ -1,0 +1,16 @@
+--Someday, Mak will find you. Break those, chains that bind you.
+local Player = game.Workspace:FindFirstChild(script.Parent.Parent.Parent.Parent.Name)
+distance = 0
+
+function Click()
+	local Player = game.Workspace:FindFirstChild(script.Parent.Parent.Parent.Parent.Name)
+	if Player then
+		--subtract $(400*((20/distance)^2))
+		print(1000*(math.floor((Player.Torso.Position.z)/64))+(math.floor((Player.Torso.Position.x)/64))+20020)
+		plot = game.Workspace.Ground:FindFirstChild(1000*(math.floor((Player.Torso.Position.z)/64))+(math.floor((Player.Torso.Position.x)/64))+20020)
+		plot.Material = "Brick"
+		--local plotgroup = Instance.new("Model", game.Workspace.Ground)
+		--plotgroup.Name = (1000*(math.floor((Player.Torso.Position.z)/64))+(math.floor((Player.Torso.Position.x)/64))+20020)
+	end
+end
+script.Parent.MouseButton1Down:connect(Click)
