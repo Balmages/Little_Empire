@@ -1,0 +1,19 @@
+local Player = game.Players.LocalPlayer
+local mouse = Player:GetMouse()
+ 
+local selection = Instance.new("SelectionBox", Player.PlayerGui)
+selection.Color = BrickColor.new("Light stone grey")
+ 
+mouse.Move:connect(function()
+	local target = mouse.Target
+	
+	if not target then
+		selection.Adornee = nil
+	elseif target.Parent.Name ~= "Workspace" then
+		if target.Parent.Parent.Parent.Name == "Workspace" and target.Parent.Owner.Value == Player.Name then
+			selection.Adornee = target	
+		end
+	else
+		selection.Adornee = nil
+	end
+end)
