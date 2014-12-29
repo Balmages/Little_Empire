@@ -1,19 +1,85 @@
 local Player = game.Players.LocalPlayer
-local mouse = Player:GetMouse()
- 
+local Mouse = Player:GetMouse()
+Message = script.Parent.Interface.Message
+Balmages = script.Parent.Interface.Shop.Close.Balmages.Value 
+
 local selection = Instance.new("SelectionBox", Player.PlayerGui)
 selection.Color = BrickColor.new("Light stone grey")
  
-mouse.Move:connect(function()
-	local target = mouse.Target
+Mouse.Move:connect(function()
+	local Target = Mouse.Target
 	
-	if not target then
+	if not Target then
 		selection.Adornee = nil
-	elseif target.Parent.Name ~= "Workspace" then
-		if target.Parent.Parent.Parent.Name == "Workspace" and target.Parent.Owner.Value == Player.Name then
-			selection.Adornee = target	
+	elseif Target.Parent.Name ~= "Workspace" then
+		if Target.Parent.Parent.Parent.Name == "Workspace" and Target.Parent.Owner.Value == Player.Name then
+			selection.Adornee = Target	
 		end
 	else
 		selection.Adornee = nil
+	end
+end)
+
+Mouse.Button1Down:connect(function()
+	Target = Mouse.Target
+	if Target.Parent.Name ~= "Workspace" then
+		if Target.Parent.Parent.Parent.Name == "Workspace" and Target.Parent.Owner.Value == Player.Name then
+--[[  			locate3d1 = Target.Parent:FindFirstChild(Target.Name-0.01)
+			locate3d2 = Target.Parent:FindFirstChild(Target.Name+0.01)
+			locate3d3 = Target.Parent:FindFirstChild(Target.Name-1)
+			locate3d4 = Target.Parent:FindFirstChild(Target.Name+1)
+			locate3d5 = Target.Parent:FindFirstChild(Target.Name-100)
+			locate3d6 = Target.Parent:FindFirstChild(Target.Name+100)
+			
+			for Baritones=1,6,1 do
+				print("locate3d"..Baritones)
+				if not ("locate3d"..Baritones) then
+					print("block locate3d"..Baritones.." found")
+				else
+					local block = game.Lighting.Block:Clone()
+					print("y:"..(Target.Name-math.floor(Target.Name)))
+					print("z:"..100*math.floor(Target.Name/100))
+					print("x:"..math.floor(Target.Name)-(100*math.floor(Target.Name/100)))
+					
+					block.Name = ((100*math.floor(Target.Name/100))+(math.floor(Target.Name)-(100*math.floor(Target.Name/100)))+(Target.Name-math.floor(Target.Name)))
+					block.Parent = Target.Parent
+					block.Position = Vector3.new(0,10*(Target.Name-math.floor(Target.Name)),0)
+				end
+			end
+]] still in progress
+			for James=0,1,.025 do 
+				Target.Transparency = James
+				wait(.1)
+			end
+			Target.CanCollide = false
+		elseif Target.Parent.Name == "Shopkeeper" then
+			print("Geschäftsführer geklickt")
+			print((game.Workspace:FindFirstChild(Player.Name).Torso.Position.x-32)+(game.Workspace:FindFirstChild(Player.Name).Torso.Position.z-32))
+			if math.abs(math.abs(game.Workspace:FindFirstChild(Player.Name).Torso.Position.x-32)+math.abs(game.Workspace:FindFirstChild(Player.Name).Torso.Position.z-32))<80 then
+				Balmages = Balmages + 1 -(2*Balmages)
+				if Balmages == 1 then
+					script.Parent.Interface.Shop.Visible = true
+				elseif Balmages == 0 then
+					script.Parent.Interface.Shop.Visible = false
+				end
+			elseif (math.abs(game.Workspace:FindFirstChild(Player.Name).Torso.Position.x-32)+math.abs(game.Workspace:FindFirstChild(Player.Name).Torso.Position.z-32))>80 then
+				if Balmages == 1 then
+					Balmages = 0
+					script.Parent.Interface.Shop.Visible = false
+				else				
+					Message.Text = "You're too far away to perform this action"				
+					Message.Visible = true
+					Message.BackgroundTransparency = 0.2
+					Message.TextTransparency = 0
+					wait(1)
+					for GutenMorgen=0.2,1,.025 do
+						Message.BackgroundTransparency = GutenMorgen
+						Message.TextTransparency = GutenMorgen-.2
+						wait(.025)
+					end
+					Message.Visible = false
+				end	
+			end
+		end
 	end
 end)
